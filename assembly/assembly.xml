@@ -1,0 +1,49 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd
+http://maven.apache.org/ASSEMBLY/2.0.0 ">
+    <!--id则是添加到打包文件名的标识符，用来做后缀.按下述配置生成的文件就是artifactId−{version}-may.zip-->
+    <id>may</id>
+    <!--formats是assembly插件支持的打包文件格式，有zip、tar、tar.gz、tar.bz2、jar、war。可以同时定义多个format-->
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <!--用来设置一组文件在打包时的属性-->
+    <fileSets>
+        <fileSet>
+            <!--源目录的路径-->
+            <directory>bin</directory>
+            <!--includes/excludes 设定包含或排除哪些文件，支持通配符-->
+            <includes>
+                <include>*.bat</include>
+            </includes>
+            <!--生成目录的路径-->
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <!--false表示将依赖以原来的JAR形式打包，true则表示将依赖解成*.class文件的目录结构打包-->
+            <unpack>false</unpack>
+            <!--表示符合哪个作用范围的依赖会被打包进去。compile与provided都不用管，一般是写runtime-->
+            <scope>runtime</scope>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>${groupId}:${artifactId}</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+</assembly>

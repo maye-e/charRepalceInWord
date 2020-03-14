@@ -1,0 +1,9 @@
+#给定一个目录,该目录及子目录下所用的 *.doc 或 *.docx 文件都会被识别并处理
+directory=
+#是否显示替换过程,可选值:true(显示) | false(不显示).  空默认为false
+show_detail=false
+#被替换字符大小写是否敏感. 可选值: false(不敏感), 被替换字符忽略大小写 may|MAY 都会被替换.  true(敏感,默认), 被替换字符严格区分大小写 may|MAY 不会被同时替换
+caseSensitive=true
+#需替换的字符配置在下面.如将word中的 "今天" 替换成 "明天" ,格式为: 今天=明天
+[replace_str]
+#今天=明天

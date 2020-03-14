@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.may</groupId>
+    <artifactId>charRepalceInWord</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <description>word中字符替换</description>
+
+    <repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+            <name>e-iceblue</name>
+            <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>e-iceblue</groupId>
+            <artifactId>spire.doc.free</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--maven-jar-plugin主要就是配置了MANIFEST.MF这个文件而已，就是让可执行文件知道自己怎么执行，加载哪些文件执行的描述-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.may.doMain</mainClass>
+                            <!--是否将依赖一起打包-->
+                            <addClasspath>true</addClasspath>
+                            <!--第三方依赖包被放在lib目录中-->
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>./</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                    <excludes>
+                        <!--排除的文件不会被打包-->
+                        <exclude>conf/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <finalName>word字符替换</finalName>
+                    <!--配置描述文件路径-->
+                    <descriptor>assembly/assembly.xml</descriptor>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- 配置执行器 -->
+                        <id>assembly</id>
+                        <!-- 绑定到package声明周期上 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 只运行一次 -->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
