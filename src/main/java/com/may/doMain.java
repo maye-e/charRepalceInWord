@@ -3,7 +3,6 @@ package com.may;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import cn.hutool.setting.Setting;
@@ -52,7 +51,7 @@ public class doMain {
         }
 
         // 文件过滤器,只要目标文件
-        FileFilter fileFilter = (file) -> {
+        FileFilter fileFilter = file -> {
             if (FileUtil.pathEndsWith(file, "docx") || FileUtil.pathEndsWith(file, "doc")) {
                 return true;
             }
