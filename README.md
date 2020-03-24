@@ -1,2 +1,2 @@
 # charRepalceInWord sprintboot版
-word字符替换（技术点：assembly自定义打包结构，便于快速启动、部署）
+目前已知未修复的问题:yml文件中获取map的值有问题
