@@ -70,7 +70,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.may.doMain</mainClass>
+                            <mainClass>com.may.BootMain</mainClass>
                             <!--是否将依赖一起打包-->
                             <addClasspath>true</addClasspath>
                             <!--第三方依赖包被放在lib目录中-->
@@ -82,7 +82,7 @@
                     </archive>
                     <excludes>
                         <!--排除的文件不会被打包-->
-                        <exclude>conf/**</exclude>
+                        <exclude>resources/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

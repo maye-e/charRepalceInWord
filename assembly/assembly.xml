@@ -19,15 +19,15 @@ http://maven.apache.org/ASSEMBLY/2.0.0 ">
                 <include>*.bat</include>
             </includes>
             <!--生成目录的路径-->
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>./</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>src/main/resources</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>./</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>./</outputDirectory>
             <includes>
                 <include>*.jar</include>
             </includes>
