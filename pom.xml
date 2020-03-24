@@ -3,7 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <groupId>com.may</groupId>
     <artifactId>charRepalceInWord</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -18,6 +23,23 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!-- 导入配置文件处理器，配置文件绑定就会有提示 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
         <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -66,14 +88,14 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <finalName>word字符替换</finalName>
-                    <!--配置描述文件路径-->
-                    <descriptor>assembly/assembly.xml</descriptor>
-                </configuration>
                 <executions>
                     <execution>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <finalName>word字符替换</finalName>
+                            <!--配置描述文件路径 ${project.basedir}/src/main/resources/assembly/assembly.xml -->
+                            <descriptors>assembly/assembly.xml</descriptors>
+                        </configuration>
                         <!-- 配置执行器 -->
                         <id>assembly</id>
                         <!-- 绑定到package声明周期上 -->
