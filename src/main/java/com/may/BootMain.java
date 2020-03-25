@@ -1,10 +1,9 @@
 package com.may;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import com.may.config.PropVO;
 import com.spire.doc.Document;
 import com.spire.doc.FileFormat;
@@ -16,6 +15,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 @Slf4j
@@ -27,7 +27,7 @@ public class BootMain {
         //启动spring容器,返回一个ApplicationContext
         ConfigurableApplicationContext context = SpringApplication.run(BootMain.class, args);
         PropVO propVO = (PropVO)context.getBean("propVO");
-
+        Map<String, String> map = CollUtil.zip(propVO.getBefore(), propVO.getAfter());//将两个list一一对应，第一个list值作为key，第二个list值作为value
         // 文件过滤器,只要目标文件
         FileFilter fileFilter = file -> {
             if (FileUtil.pathEndsWith(file, "docx") || FileUtil.pathEndsWith(file, "doc")) {
@@ -47,7 +47,7 @@ public class BootMain {
         files.stream().forEach(file -> {
             //加载Word文档
             Document document = new Document(file.getPath());
-            propVO.getReplaces().forEach((original, update) -> {
+            map.forEach((original, update) -> {
                 //使用新文本替换文档中的指定文本
                 document.replace(original, update, propVO.getCaseSensitive(), true);
             });
